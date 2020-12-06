@@ -1,2 +1,2 @@
 # Message_Broadcaster
-Message broadcasting server with boost websockets
+An uber simple message broadcasting server with boost asio & beast::websockets.

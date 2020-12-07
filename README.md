@@ -6,10 +6,9 @@ Multiple websocket clients can connect to the server concurrently and observe th
 
 # Installing boost library :
 This server has been coded on boost 1.74.0 and built with gcc 9.3.0, and tested in Ubuntu 16.04 only, currently.
-<br>Gather boost latest for your **nix* destro - On Ubuntu, debian sort of distributions, the usual 'apt-get' works well.
-
+<br>Gather boost latest for your *nix destro - On Ubuntu, debian sort of distributions, the usual 'apt-get' works well.
     `
-    $ sudo apt-get update
+    $ sudo apt-get update    
     `
 <br><br>Install boost:<br><br>
     `

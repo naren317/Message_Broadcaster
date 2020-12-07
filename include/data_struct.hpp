@@ -1,7 +1,9 @@
 #ifndef __DATA_STRUCT__
 #define __DATA_STRUCT__
+
 #include <utility>
 #include <iostream>
+
 struct data_struct
 {
 

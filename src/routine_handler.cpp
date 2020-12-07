@@ -52,7 +52,6 @@ namespace server
         {
             std::cout << " Error occurred : " << ec.message() << std::endl
                       << " Error code : " << ec.value() << std::endl;
-            //_wsock.next_layer().socket().shutdown(asio::socket_base::shutdown_both);
         }
         else
         {

@@ -3,12 +3,8 @@
 
 #include "broadcast_module.hpp"
 #include <boost/bind.hpp>
-#include <boost/asio/buffer.hpp>
 #include <boost/thread/thread.hpp>
-#include <mutex>
-#include <future>
 #include <boost/interprocess/managed_shared_memory.hpp>
-#include <cstring>
 
 class server::connection_server::impl
 {
@@ -23,11 +19,12 @@ private:
     const unsigned short _port;
     interprocess::managed_shared_memory _msm;
     void *_sh_mem;
+
     struct _delete_shared_mem
-   {
-      _delete_shared_mem() { interprocess::shared_memory_object::remove("Shared_Mem"); }
-      ~_delete_shared_mem(){ interprocess::shared_memory_object::remove("Shared_Mem"); }
-   } _delete_shared_mem;
+    {
+        _delete_shared_mem() { interprocess::shared_memory_object::remove("Shared_Mem"); }
+        ~_delete_shared_mem() { interprocess::shared_memory_object::remove("Shared_Mem"); }
+    } _delete_shared_mem;
 
 public:
     explicit impl(const unsigned short &port = _PORT) : _port(port),
@@ -39,15 +36,22 @@ public:
                                                         _broadcast_data("Default broadcast message\r\n"),
                                                         _sh_mem(nullptr),
                                                         _delete_shared_mem(),
-                                                        _msm(interprocess::open_or_create, "Shared_Mem", 10*1024)
+                                                        _msm(interprocess::open_or_create, "Shared_Mem", 10 * 1024)
     {
         _thread_group.create_thread(
-            [&] {
+            [&] 
+            {
                 boost::asio::signal_set ss(_ioc, SIGTERM, SIGINT);
-                ss.async_wait([&](const system::error_code &ec, int signal) {
+
+                ss.async_wait(
+                    [&](const system::error_code &ec, int signal)
+                    {
+
                     _ioc.stop();
-                });
-                _ioc.run();
+
+                    });
+
+                    _ioc.run();
             });
     }
 
@@ -55,16 +59,18 @@ public:
     start_listening_impl() noexcept(false)
     {
         auto _socket{_acceptor.accept()};
-            _thread_group.create_thread(
-                [&] {
-                    _mtx.lock();
-                    server::routine_handler _rh(std::forward<tcp::socket>(_socket), _sh_mem);
-                    _mtx.unlock();
-                    _rh.run_routine_handlers();
-                    _ioc.run();
-                });
-            std::raise(SIGTERM);
-            start_listening_impl();
+
+        _thread_group.create_thread(
+            [&]
+            {
+                _mtx.lock();
+                server::routine_handler _rh(std::forward<tcp::socket>(_socket), _sh_mem);
+                _mtx.unlock();
+                _rh.run_routine_handlers();
+                _ioc.run();
+            });
+        
+        start_listening_impl();
     }
 
     system::error_code
@@ -88,14 +94,15 @@ public:
     setup_shared_memory()
     {
         _sh_mem = _msm.construct<data_struct>("Shared_Data")();
-        static_cast<data_struct*>(_sh_mem)->set_buffer_and_size(_broadcast_data.c_str(), _broadcast_data.size());
+        static_cast<data_struct *>(_sh_mem)->set_buffer_and_size(_broadcast_data.c_str(), _broadcast_data.size());
     }
 
     void
     setup_broadcasting_msg()
     {
         _thread_group.create_thread(
-            [&] {
+            [&]
+            {
                 _mtx.lock();
                 server::broadcast_module _bm(_ioc, _sh_mem, _port);
                 _mtx.unlock();
@@ -109,6 +116,7 @@ public:
         std::cout << " Shutting down server .." << std::endl;
         if (!_ioc.stopped())
             _ioc.stop();
+            
         std::unique_lock<interprocess::interprocess_mutex> _ulock(_mtx);
         _thread_group.join_all();
         _acceptor.close();

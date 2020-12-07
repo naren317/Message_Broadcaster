@@ -22,7 +22,7 @@ namespace server
         {
             pImpl->setup_shared_memory();
             pImpl->setup_broadcasting_msg();
-            
+
             auto ec = pImpl->set_acceptor_properties_impl();
             if (ec)
             {

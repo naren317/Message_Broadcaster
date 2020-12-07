@@ -4,12 +4,12 @@
 
 namespace server
 {
-    broadcast_module::broadcast_module(asio::io_context& ioc, void *sh_mem, unsigned short port) : _ioc(ioc),
-                                                                                                _sh_mem(sh_mem),
-                                                                                                _port(port),
-                                                                                                _endp(tcp::endpoint(ip::address_v4::any(), port + 1)),
-                                                                                                _acceptor(_ioc),
-                                                                                                _broadcast_data()
+    broadcast_module::broadcast_module(asio::io_context &ioc, void *sh_mem, constus& port) : _ioc(ioc),
+                                                                                                   _sh_mem(sh_mem),
+                                                                                                   _port(port),
+                                                                                                   _endp(tcp::endpoint(ip::address_v4::any(), port + 1)),
+                                                                                                   _acceptor(_ioc),
+                                                                                                   _broadcast_data()
 
     {
         set_acceptor_properties();
@@ -38,7 +38,7 @@ namespace server
         static_cast<data_struct *>(_sh_mem)->set_buffer_and_size(_broadcast_data.c_str(), _broadcast_data.size());
         _baccept.send(asio::buffer("Broadcast message successfully registered ...\r\n"));
         _baccept.shutdown(asio::socket_base::shutdown_both);
-        if(!_ioc.stopped())
+        if (!_ioc.stopped())
             run_broadcast_module();
     }
 

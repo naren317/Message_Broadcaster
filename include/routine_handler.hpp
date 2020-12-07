@@ -1,6 +1,5 @@
 #ifndef _ROUTINE_HANDLER_
 #define _ROUTINE_HANDLER_
-#define __INCLUDE_BEAST__
 
 #include "common_utils.hpp"
 #include <memory>
@@ -11,14 +10,14 @@ namespace server
     {
 
     public:
-        explicit routine_handler(tcp::socket&& socket, void* buff);
+        explicit routine_handler(tcp::socket &&socket, void *buff);
         ~routine_handler();
 
         void
-        on_accept(const system::error_code& ec);
+        on_accept(const system::error_code &ec);
 
         void
-        on_write(const system::error_code& ec, const size_t bytes);
+        on_write(const system::error_code &ec, const size_t bytes);
 
         void
         run_routine_handlers();
@@ -32,8 +31,7 @@ namespace server
     private:
         websocket::stream<beast::tcp_stream> _wsock;
         beast::flat_buffer _data_buff;
-        void* _buff;
-
+        void *_buff;
     };
 } // namespace server
 

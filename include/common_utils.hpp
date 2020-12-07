@@ -5,7 +5,9 @@
 #include <boost/interprocess/shared_memory_object.hpp>
 #include <boost/interprocess/mapped_region.hpp>
 
-#include <boost/beast.hpp>
+#ifdef INCLUDE_BEAST_
+    #include <boost/beast.hpp>
+#endif
 
 namespace server
 {
@@ -15,10 +17,11 @@ namespace server
     namespace system = boost::system;
     using tcp = ip::tcp;
     using socket_base = asio::socket_base;
-
+    
+#ifdef INCLUDE_BEAST_
     namespace beast = boost::beast;
     namespace websocket = beast::websocket;
+#endif
 
-} // namespace server
-
+}
 #endif

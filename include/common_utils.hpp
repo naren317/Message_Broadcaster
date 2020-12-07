@@ -11,12 +11,14 @@
 
 namespace server
 {
+
     namespace asio = boost::asio;
     namespace ip = asio::ip;
     namespace interprocess = boost::interprocess;
     namespace system = boost::system;
     using tcp = ip::tcp;
     using socket_base = asio::socket_base;
+    using constus = const unsigned short;
     
 #ifdef INCLUDE_BEAST_
     namespace beast = boost::beast;

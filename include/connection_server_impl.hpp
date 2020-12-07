@@ -5,6 +5,7 @@
 #include <boost/bind.hpp>
 #include <boost/thread/thread.hpp>
 #include <boost/interprocess/managed_shared_memory.hpp>
+#include <iostream>
 
 class server::connection_server::impl
 {
@@ -16,7 +17,7 @@ private:
     boost::thread_group _thread_group;
     interprocess::interprocess_mutex _mtx;
     std::string _broadcast_data;
-    const unsigned short _port;
+    constus _port;
     interprocess::managed_shared_memory _msm;
     void *_sh_mem;
 
@@ -27,7 +28,7 @@ private:
     } _delete_shared_mem;
 
 public:
-    explicit impl(const unsigned short &port = _PORT) : _port(port),
+    explicit impl(constus &port = _PORT) : _port(port),
                                                         _ioc(boost::thread::hardware_concurrency()),
                                                         _endp(tcp::endpoint(ip::address_v4::any(), port)),
                                                         _acceptor(_ioc),

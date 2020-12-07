@@ -1,11 +1,12 @@
 #include "connection_server.hpp"
 #include "connection_server_impl.hpp"
+#include <iostream>
 
 namespace server
 {
     const unsigned short _PORT = 9000;
 
-    connection_server::connection_server(const unsigned short &port) : pImpl(std::make_unique<impl>(port)),
+    connection_server::connection_server(constus &port) : pImpl(std::make_unique<impl>(port)),
                                                                        PORT(port)
     {
     }

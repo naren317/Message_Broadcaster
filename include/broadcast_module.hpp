@@ -5,11 +5,10 @@
 
 namespace server
 {
-    extern const unsigned short _PORT;
+    extern constus _PORT;
 
     class broadcast_module
     {
-        using constus = const unsigned short;
 
     private:
         asio::io_context& _ioc;

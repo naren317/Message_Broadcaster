@@ -30,7 +30,6 @@ namespace server
 
     private:
         websocket::stream<beast::tcp_stream> _wsock;
-        beast::flat_buffer _data_buff;
         void *_buff;
     };
 } // namespace server

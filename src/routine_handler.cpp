@@ -7,7 +7,6 @@
 namespace server
 {
     routine_handler::routine_handler(tcp::socket &&socket, void *buff) : _wsock(std::move(socket)),
-                                                                         _data_buff(),
                                                                          _buff(buff)
     {
     }

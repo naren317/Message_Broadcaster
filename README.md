@@ -4,7 +4,7 @@ An uber simple message broadcasting server powered by boost asio & beast websock
 # Description :
 Multiple websocket clients can connect to the server concurrently and observe the transmitted message, which can be generated on the fly by connecting to a different module within server.
 
-# Installing boost library:
+# Installing boost library :
 This server has been coded on boost 1.74.0 and built with gcc 9.3.0, and tested in Ubuntu 16.04 only, currently.
 <br>Gather boost latest for your **nix* destro - On Ubuntu, debian sort of distributions, the usual 'apt-get' works well.
 
@@ -32,7 +32,7 @@ This server has been coded on boost 1.74.0 and built with gcc 9.3.0, and tested 
     sudo ./b2 install
     `
     
-# Building
+# Building :
 Run the cmake build system by including the necessary boost::beast headers and installation path (install path that is included in your $PATH would be convenient):<br><br>
     `
     cmake -DINCLUDE_BEAST_ /path/to/top/level/CMakeLists.txt -DCMAKE_PREFIX_PATH= /your/choice/of/path/to/binary
@@ -41,7 +41,7 @@ Run the cmake build system by including the necessary boost::beast headers and i
     `
     cmake --build . --config release --clean-first
     `
-# Usage
+# Usage :
 Run your server with the following, with specifying port number that your server listens to:<br><br>
 `
 ./Message_Broadcast_Server <PORT>

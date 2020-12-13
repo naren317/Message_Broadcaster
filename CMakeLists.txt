@@ -1,21 +1,10 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.17.5) # Tested on cmake 3.17.5 as of now
+cmake_minimum_required(VERSION 3.17.5)
 
-project(Message_Broadcasting_Server)
+project(Message_Broadcaster)
 
+set(CMAKE_BUILD_TYPE release)
 set(CMAKE_CXX_STANDARD 17)
-option(INCLUDE_BEAST OFF)
+add_compile_options(-g) # Helps in gdb debug
 
-if(INCLUDE_BEAST)
-    add_definitions(-DINCLUDE_BEAST_)
-endif(INCLUDE_BEAST)
-
-include_directories(${CMAKE_SOURCE_DIR}/include ${Boost_INCLUDE_DIRS})
-file(GLOB HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp)
-set(SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/connection_server.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/src/routine_handler.cpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/src/broadcast_module.cpp)
-
-find_package(Boost 1.74.0 REQUIRED COMPONENTS system thread)
-add_executable(${PROJECT_NAME}  ${SOURCES} ${HEADERS})
-target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES} -lrt)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Message_Broadcasting_Server)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Websocket_Client)

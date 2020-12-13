@@ -1,15 +1,21 @@
 #ifndef _ROUTINE_HANDLER_
 #define _ROUTINE_HANDLER_
+#define __INCLUDE_BEAST__
 
 #include "common_utils.hpp"
 #include <memory>
+#include <boost/bind/bind.hpp>
 
 namespace server
 {
-    class routine_handler
+    class routine_handler : public std::enable_shared_from_this<server::routine_handler>
     {
+    private:
+        websocket::stream<beast::tcp_stream> _wsock;
+        void *_buff;
 
-    public:
+    public:        
+
         explicit routine_handler(tcp::socket &&socket, void *buff);
         ~routine_handler();
 
@@ -28,9 +34,6 @@ namespace server
         std::string
         get_timestamp() const;
 
-    private:
-        websocket::stream<beast::tcp_stream> _wsock;
-        void *_buff;
     };
 } // namespace server
 

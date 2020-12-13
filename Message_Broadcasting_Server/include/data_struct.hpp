@@ -1,11 +1,12 @@
 #ifndef __DATA_STRUCT__
 #define __DATA_STRUCT__
-
+#include <utility>
+#include <iostream>
 struct data_struct
 {
 
 private:
-  std::string _data_buff;
+  std::string _data_buff ;
   size_t _buff_size;
 
 public:

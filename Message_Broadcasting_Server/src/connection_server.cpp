@@ -1,13 +1,21 @@
 #include "connection_server.hpp"
 #include "connection_server_impl.hpp"
+#include "routine_handler.hpp"
 #include <iostream>
 
 namespace server
 {
-    const unsigned short _PORT = 9000;
+    const std::string _PORT = R"(9000)";
 
-    connection_server::connection_server(constus &port) : pImpl(std::make_unique<impl>(port)),
-                                                                       PORT(port)
+    const std::string helper::module[(int)helper::mod_index::ON_HANDSHAKE] = {"Setting acceptor properties",
+                                                                              "Connect",
+                                                                              "Accept",
+                                                                              "Read",
+                                                                              "Write",
+                                                                              "Handshake"};
+
+    connection_server::connection_server(const std::string port) : pImpl(std::make_unique<impl>(port)),
+                                                                   PORT(std::strtoul(port.c_str(), nullptr, 10))
     {
     }
 
@@ -17,21 +25,22 @@ namespace server
 
     void connection_server::start_server()
     {
-        std::cout << " Register broadcast message @ PORT : " << PORT + 1 << std::endl
-                  << " To view broadcast message connect PORT @ " << PORT << std::endl;
+        std::cout << " To view the broadcasted message connect PORT @ " << PORT << std::endl
+                  << " To modify the broadcasted message register @ PORT : " << PORT + 1 << std::endl;
         try
         {
             pImpl->setup_shared_memory();
+
             pImpl->setup_broadcasting_msg();
 
             auto ec = pImpl->set_acceptor_properties_impl();
             if (ec)
             {
-                std::cout << "Error occurred while setting acceptor properties..!!" << std::endl
-                          << ec.message() << std::endl;
+                helper::on_error(ec, helper::mod_index::ON_SETTING_ACCEPTOR_PROPERTIES);
                 pImpl->exception_handler_impl();
             }
             std::cout << " Listening ... Press ctrl + c to abort ..." << std::endl;
+
             pImpl->start_listening_impl();
         }
 

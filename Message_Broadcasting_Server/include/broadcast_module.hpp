@@ -5,24 +5,23 @@
 
 namespace server
 {
-    extern constus _PORT;
+    extern const std::string _PORT;
 
     class broadcast_module
     {
-
     private:
         asio::io_context& _ioc;
         void *_sh_mem;
         tcp::acceptor _acceptor;
         tcp::endpoint _endp;
         std::string _broadcast_data;
-        constus& _port;
+        const std::string _port;
 
         void
         set_acceptor_properties();
 
     public:
-        explicit broadcast_module(asio::io_context& ioc, void *sh_mem = nullptr, constus& port = _PORT);
+        explicit broadcast_module(asio::io_context& ioc, void *sh_mem = nullptr, const std::string port = _PORT);
 
         void
         run_broadcast_module();

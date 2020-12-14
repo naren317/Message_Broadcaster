@@ -20,28 +20,45 @@ This server has been coded on boost 1.74.0 and built with gcc 9.3.0, and tested 
     `
 <br><br>Decompress and untar this to recover the sources. Configure the build and set the installation path from inside the above boost_1_xx_x directory:<br><br>
     `
-    ./bootstrap.sh --prefix=/usr/
+    $ ./bootstrap.sh --prefix=/usr/
     `
 <br><br>Generate the headers:<br><br>
     `
-    ./b2 headers
+    $ ./b2 headers
     `
 <br><br>Finally, build and install the library:<br><br>
     `
-    sudo ./b2 install
+    $ sudo ./b2 install
     `
     
 # Building the server :
 Run the cmake build system by including the necessary boost::beast headers and installation path (install path that is included in your $PATH would be convenient):<br><br>
     `
-    cmake /path/to/top/level/CMakeLists.txt -DCMAKE_PREFIX_PATH= /your/choice/of/path/to/binary
+    $ cmake /path/to/top/level/CMakeLists.txt -DCMAKE_PREFIX_PATH= /your/choice/of/path/to/binary
     `
 <br><br>Build it:<br><br>
     `
-    cmake --build . --config release --clean-first --target install
+    $ cmake --build . --config release --clean-first --target install
     `
 # Usage :
-Run your server with the following, with specifying port number that your server listens to:<br><br>
+1) Run your server with the following, specifying port number that your server listens to (default port is <i>9000</i>) :<br><br>
 `
-./Message_Broadcast_Server <PORT>
+$ ./Message_Broadcasting_Server <PORT>
 `
+<br><br>2) Connect your server with websocket client to check the broadcasted data. Many clients can connect to the server concurrently.<br><br>
+`
+$ ./Websocket_Client <SERVER> <PORT>
+`
+<br><br>3) In order to change the broadcasted message on-the-fly, connect to the broadcast message module with any other communication client tool viz, <i>telnet, netcat, putty, nc </i>:<br><br>
+`
+$ nc <SERVER> <PORT> + 1
+`
+<br><br>For example, if your websocket server runs on <i>localhost:9000</i> then :<br><br>
+`
+$ nc localhost 9001
+`
+<br><br>4) Type in your message to be broadcasted and then end with the tag <i>endofmsg</i> like so :<br><br>
+`
+$ Hello World endofmsg
+`
+<br><br>will broadcast <i>Hello World</i> on all the listening clients. 

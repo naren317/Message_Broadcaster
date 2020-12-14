@@ -32,24 +32,25 @@ This server has been coded on boost 1.74.0 and built with gcc 9.3.0, and tested 
     `
     
 # Building the server :
-Run the cmake build system by including the necessary boost::beast headers and installation path (install path that is included in your $PATH would be convenient):<br><br>
+Run the cmake build system by specifying the installation path (install path that is included in your $PATH would be convenient):<br><br>
     `
     $ cmake /path/to/top/level/CMakeLists.txt -DCMAKE_PREFIX_PATH= /your/choice/of/path/to/binary
     `
-<br><br>Build it:<br><br>
+<br><br>Build it, this builds the websocket client project too :<br><br>
     `
     $ cmake --build . --config release --clean-first --target install
     `
+    
 # Usage :
-1) Run your server with the following, specifying port number that your server listens to (default port is <i>9000</i>) :<br><br>
+1.) Run your server with the following, specifying port number that your server listens to (default port is <i>9000</i>) :<br><br>
 `
 $ ./Message_Broadcasting_Server <PORT>
 `
-<br><br>2) Connect your server with websocket client to check the broadcasted data. Many clients can connect to the server concurrently.<br><br>
+<br><br> 2.) Connect your server with websocket client to check the broadcasted data. Many clients can connect to the server concurrently.<br><br>
 `
 $ ./Websocket_Client <SERVER> <PORT>
 `
-<br><br>3) In order to change the broadcasted message on-the-fly, connect to the broadcast message module with any other communication client tool viz, <i>telnet, netcat, putty, nc </i>:<br><br>
+<br><br> 3.) In order to change the broadcasted message on-the-fly, connect to the broadcast message module with any other communication client tool viz, <i>telnet, netcat, putty, nc </i>:<br><br>
 `
 $ nc <SERVER> <PORT> + 1
 `
@@ -57,7 +58,7 @@ $ nc <SERVER> <PORT> + 1
 `
 $ nc localhost 9001
 `
-<br><br>4) Type in your message to be broadcasted and then end with the tag <i>endofmsg</i> like so :<br><br>
+<br><br> 4.) Type in your message to be broadcasted and then end with the tag <i>endofmsg</i> like so :<br><br>
 `
 $ Hello World endofmsg
 `

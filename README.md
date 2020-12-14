@@ -31,14 +31,14 @@ This server has been coded on boost 1.74.0 and built with gcc 9.3.0, and tested 
     sudo ./b2 install
     `
     
-# Building :
+# Building the server :
 Run the cmake build system by including the necessary boost::beast headers and installation path (install path that is included in your $PATH would be convenient):<br><br>
     `
-    cmake -DINCLUDE_BEAST_ /path/to/top/level/CMakeLists.txt -DCMAKE_PREFIX_PATH= /your/choice/of/path/to/binary
+    cmake /path/to/top/level/CMakeLists.txt -DCMAKE_PREFIX_PATH= /your/choice/of/path/to/binary
     `
 <br><br>Build it:<br><br>
     `
-    cmake --build . --config release --clean-first
+    cmake --build . --config release --clean-first --target install
     `
 # Usage :
 Run your server with the following, with specifying port number that your server listens to:<br><br>

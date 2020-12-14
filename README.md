@@ -1,6 +1,9 @@
 # Message_Broadcaster :
 An uber simple message broadcasting server powered by boost asio & beast websockets.
 
+# Platforms :
+*nix distributions with compatible boost library support built with gcc 9.3.0 and cmake 3.17.5 .
+
 # Description :
 Multiple websocket clients can connect to the server concurrently and observe the transmitted message, which can be generated on the fly by connecting to a different module within server.
 

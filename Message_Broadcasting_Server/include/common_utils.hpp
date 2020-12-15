@@ -32,7 +32,7 @@ namespace server
 
         static const std::string module[(int)mod_index::ON_HANDSHAKE];
        
-        static void on_error(system::error_code const ec, mod_index const mi)
+        static void on_error(const system::error_code& ec, mod_index const mi)
         {
             std::cout << module[(int)mi-1] << " Error : " << ec.message() << std::endl
                       << " Error code : " << ec.value() << std::endl;

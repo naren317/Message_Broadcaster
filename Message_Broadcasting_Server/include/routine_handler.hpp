@@ -1,6 +1,5 @@
 #ifndef _ROUTINE_HANDLER_
 #define _ROUTINE_HANDLER_
-#define __INCLUDE_BEAST__
 
 #include "common_utils.hpp"
 #include <memory>

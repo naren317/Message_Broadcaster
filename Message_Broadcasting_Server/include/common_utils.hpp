@@ -24,7 +24,6 @@ namespace server
         enum class mod_index : unsigned int
         {
             ON_SETTING_ACCEPTOR_PROPERTIES = 1,
-            ON_CONNECT,
             ON_ACCEPT,
             ON_READ,
             ON_WRITE,
@@ -36,7 +35,7 @@ namespace server
         static void on_error(system::error_code const ec, mod_index const mi)
         {
             std::cout << module[(int)mi-1] << " Error : " << ec.message() << std::endl
-                      << "Error code : " << ec.value() << std::endl;
+                      << " Error code : " << ec.value() << std::endl;
         }
     };
 } // namespace server

@@ -8,7 +8,6 @@ namespace server
     const std::string _PORT = R"(9000)";
 
     const std::string helper::module[(int)helper::mod_index::ON_HANDSHAKE] = {"Setting acceptor properties",
-                                                                              "Connect",
                                                                               "Accept",
                                                                               "Read",
                                                                               "Write",

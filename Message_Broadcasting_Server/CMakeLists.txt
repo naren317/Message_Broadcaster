@@ -11,7 +11,7 @@ set(SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/connection_server.cpp
 
 find_package(Boost 1.74.0 REQUIRED COMPONENTS system thread)
 add_executable(${PROJECT_NAME}  ${SOURCES} ${HEADERS})
-target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES} -lrt)
+target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES} -lrt) # For boost::interprocess::managed_shared_memory, which uses shm_get, which in turn uses real time solaris
 
 if(NOT DEFINED CMAKE_PREFIX_PATH)
     set(CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR})

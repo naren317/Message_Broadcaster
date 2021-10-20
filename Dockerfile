@@ -1,8 +1,8 @@
 FROM ubuntu:xenial
 
-RUN apt-get update -y && apt-get upgrade -y
-RUN apt-get install build-essential libssl-dev -y
-RUN apt-get install wget -y
+RUN apt-get update -y
+RUN apt-get upgrade -y
+RUN apt-get install build-essential libssl-dev wget -y
 
 COPY Message_Broadcaster /message_broadcaster
 COPY build_Message_Broadcaster.sh /message_broadcaster

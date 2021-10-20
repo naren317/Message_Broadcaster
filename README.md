@@ -35,7 +35,7 @@ This server has been coded on boost 1.74.0 and built with gcc 9.3.0, and tested 
     `
     
 # Building the server :
-Run the cmake build system by specifying the installation path (install path that is included in your $PATH would be convenient):<br><br>
+Run the cmake build system by specifying the installation path (install path that is included in your $PATH would be convenient). Within the root directory "Message_Broadcaster":<br><br>
     `
     $ cmake /path/to/top/level/CMakeLists.txt -DCMAKE_PREFIX_PATH= /your/choice/of/path/to/binary
     `

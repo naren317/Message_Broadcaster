@@ -78,7 +78,7 @@ $ docker images -a
 `
 <br><br> 3.) After a successful build run the container  :<br><br>
 `
-$ docker -d -it -p 9000:9000 -p 9001:9001 --name=<your container name> <your image name> Message_Broadcasting_Server localhost 9000
+$ docker run -d -it -p 9000:9000 -p 9001:9001 --name=<your container name> <your image name> Message_Broadcasting_Server localhost 9000
 `
 <br><br> Since the `Dockerfile` explicitly `EXPOSE`s port `9000` and `9001` these should be modified as per user's needs. Once the container is up and running, Message_Broadcasting_Server can be interacted with the websocket client or any other utility as aforementioned.<br><br>
 `

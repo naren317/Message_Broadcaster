@@ -90,7 +90,7 @@ namespace server
         void
         setup_shared_memory()
         {
-            _sh_mem = _msm.construct<data_struct>(_shared_data_tag)();
+            _sh_mem = _msm.construct<data_struct>(_shared_data_tag)(SharedMemString({}, _msm.get_segment_manager()));
             static_cast<data_struct *>(_sh_mem)->set_buffer_and_size(_broadcast_data.c_str(), _broadcast_data.size());
         }
 

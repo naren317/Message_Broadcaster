@@ -1,13 +1,17 @@
 #ifndef __DATA_STRUCT__
 #define __DATA_STRUCT__
+
 #include <utility>
 #include <iostream>
+
+using CharAllocator = interprocess::allocator<char, interprocess::managed_shared_memory::segment_manager>;
+using SharedMemString = interprocess::basic_string<char, std::char_traits<char>, CharAllocator>;
 
 struct data_struct
 {
 
 private:
-  std::string _data_buff ;
+  SharedMemString _data_buff ;
   size_t _buff_size;
 
 public:

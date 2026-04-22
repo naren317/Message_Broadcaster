@@ -2,8 +2,6 @@
 #define _ROUTINE_HANDLER_
 
 #include "common_utils.hpp"
-#include <memory>
-#include <boost/bind/bind.hpp>
 
 namespace server
 {

@@ -8,3 +8,4 @@ add_compile_options(-g) # Helps in gdb debug
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Message_Broadcasting_Server)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Websocket_Client)
+

@@ -2,10 +2,8 @@
 #define __CONNECTION_SERVER_IMPL__
 
 #include "broadcast_module.hpp"
-#include <boost/bind/bind.hpp>
 #include <boost/asio/buffer.hpp>
 #include <boost/thread/thread.hpp>
-#include <boost/interprocess/managed_shared_memory.hpp>
 #include <cstring>
 
 namespace server
@@ -90,7 +88,7 @@ namespace server
         void
         setup_shared_memory()
         {
-            _sh_mem = _msm.construct<data_struct>(_shared_data_tag)(SharedMemString({}, _msm.get_segment_manager()));
+            _sh_mem = _msm.construct<data_struct>(_shared_data_tag)(CharAllocator(_msm.get_segment_manager()), 4096);
             static_cast<data_struct *>(_sh_mem)->set_buffer_and_size(_broadcast_data.c_str(), _broadcast_data.size());
         }
 

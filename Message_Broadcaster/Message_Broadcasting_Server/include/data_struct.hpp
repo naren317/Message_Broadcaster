@@ -2,10 +2,9 @@
 #define __DATA_STRUCT__
 
 #include <utility>
-#include <iostream>
 
-using CharAllocator = interprocess::allocator<char, interprocess::managed_shared_memory::segment_manager>;
-using SharedMemString = interprocess::basic_string<char, std::char_traits<char>, CharAllocator>;
+using CharAllocator = boost::interprocess::allocator<char, boost::interprocess::managed_shared_memory::segment_manager>;
+using SharedMemString = boost::interprocess::basic_string<char, std::char_traits<char>, CharAllocator>;
 
 struct data_struct
 {
@@ -15,7 +14,11 @@ private:
   size_t _buff_size;
 
 public:
-  data_struct():_data_buff() {}
+  data_struct(const CharAllocator& alloc, size_t buff_size)
+    :_data_buff(alloc)
+    , _buff_size(buff_size)
+    {}
+
   ~data_struct() = default;
 
   std::pair<const char*, size_t>get_buffer_and_size() const

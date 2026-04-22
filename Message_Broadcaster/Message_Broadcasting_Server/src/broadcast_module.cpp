@@ -1,6 +1,5 @@
 #include "broadcast_module.hpp"
 #include "data_struct.hpp"
-#include <iostream>
 
 namespace server
 {

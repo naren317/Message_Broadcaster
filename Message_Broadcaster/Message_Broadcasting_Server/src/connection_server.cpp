@@ -1,7 +1,6 @@
 #include "connection_server.hpp"
 #include "connection_server_impl.hpp"
 #include "routine_handler.hpp"
-#include <iostream>
 
 namespace server
 {

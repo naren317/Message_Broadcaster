@@ -1,0 +1,11 @@
+#pragma once
+
+#include <iostream>
+#include <memory>
+#include <chrono>
+#include <thread>
+
+#include <boost/bind/bind.hpp>
+
+#include <boost/interprocess/managed_shared_memory.hpp>
+#include <boost/interprocess/containers/string.hpp>

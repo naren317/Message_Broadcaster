@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.17.5) # Tested on cmake 3.17.5 as of now
 
 project(Message_Broadcasting_Server)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${Boost_INCLUDE_DIRS})
 file(GLOB HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp)
 set(SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/connection_server.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
@@ -11,7 +10,12 @@ set(SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/connection_server.cpp
 
 find_package(Boost 1.74.0 REQUIRED COMPONENTS system thread)
 add_executable(${PROJECT_NAME}  ${SOURCES} ${HEADERS})
+
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include ${Boost_INCLUDE_DIRS})
+
 target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES} -lrt) # For boost::interprocess::managed_shared_memory, which uses shm_get, which in turn uses real time solaris
+
+target_precompile_headers(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include/common_header.pch)
 
 if(NOT DEFINED CMAKE_PREFIX_PATH)
     set(CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR})
